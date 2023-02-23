@@ -1,0 +1,13 @@
+# entry
+name: example
+on: [ push, pull_request ]
+
+jobs:
+  runner:
+    runs-on: ubuntu-latest # 选择你想要的主机系统如：ubuntu:20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: collie
+        uses: dvkunion/collie_tricker@main
+        with:
+          token: ${{ secrets.token }} # your token
