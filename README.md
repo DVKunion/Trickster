@@ -48,3 +48,4 @@ jobs:
 
 + 可以使用github action 的`on:workflow_dispatch`，通过http请求触发ci，来实现主机上线控制。
 + 也可以将token参数作为input。在每次http请求时动态带上token, 方便操作。
++ 
