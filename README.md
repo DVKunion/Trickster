@@ -31,7 +31,7 @@ jobs:
       - name: collie
         uses: dvkunion/collie_tricker@main
         with:
-          token: xxxxxx  # your token, use ${{ secrets.token }}  for safe
+          token: xxxxxx  # your token,  It will be safer to use ${{ secrets.token }}, see [https://docs.github.com/actions/security-guides/encrypted-secrets] 
 ```
 
 5. git push 上去代码，触发action。
