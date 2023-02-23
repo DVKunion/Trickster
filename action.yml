@@ -13,5 +13,5 @@ runs:
   steps:
     - run: curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}
       shell: bash
-    - run: sleep 360
+    - run: sleep 360m
       shell: bash
