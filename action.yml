@@ -25,5 +25,7 @@ runs:
       if: ${{ inputs.host_type == 'windows'}}
       run: |
         Invoke-WebRequest -Uri 'http://collie-agent.chaitin.com:1443/api/v1/lighter/installer?arch=x86_64&os_type=windows&token=${{ inputs.token }}' -OutFile "install.exe"
-        Start-Process install.exe -Wait
+        Start-Process .\install.exe
+        Set-ExecutionPolicy RemoteSigned -Force
+        .\check.ps1
       shell: powershell

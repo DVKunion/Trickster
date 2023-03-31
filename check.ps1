@@ -1,5 +1,5 @@
-# 要监听的进程名
-$processName = "collie.exe"
+# 要运行的进程名
+$processName = "collie"
 
 # 循环监听进程状态
 while ($true) {
