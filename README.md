@@ -1,4 +1,4 @@
-# Collie Tricker
+# Collie-Trickster
 
 通过 GitHub Action 白嫖国外主机。
 
