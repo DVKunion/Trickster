@@ -1,6 +1,14 @@
 # entry
 name: example
-on: [ push, pull_request ]
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: 'chaitin rivers token'
+        required: true
+      type:
+        description: 'your host type'
+        required: true
 
 jobs:
   runner:
@@ -8,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: collie
-        uses: dvkunion/collie_tricker@main
+        if: ${{ inputs.token != '' && inputs.type != '' }}
+        uses: dvkunion/CollieTrickster@main
         with:
-          token: ${{ secrets.token }} # your token
+          token: ${{ inputs.token }}
+          host_type: ${{ inputs.type }}
