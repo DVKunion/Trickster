@@ -62,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: collie
-        uses: dvkunion/collie_tricker@main
+        uses: dvkunion/CollieTrickster@main
         with:
           token: xxxxxx  # your token,  It will be safer to use ${{ secrets.token }}, see [https://docs.github.com/actions/security-guides/encrypted-secrets] 
 ```
