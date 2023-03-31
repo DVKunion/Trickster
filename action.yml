@@ -11,16 +11,15 @@ inputs:
   host_type:
     description: 'your host type like: linux/windows'
     default: 'linux'
-  time:
-    description: 'continue time, min'
-    default: '360'
 
 runs:
   using: 'composite'
   steps:
     - name: regist-linux-host
       if: ${{ inputs.host_type == 'linux'}}
-      run: curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}
+      run: |
+        curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}
+        chmod +x check.sh && ./check.sh
       shell: bash
     - name:  regist-windows-host
       if: ${{ inputs.host_type == 'windows'}}
@@ -28,6 +27,3 @@ runs:
         Invoke-WebRequest -Uri 'http://collie-agent.chaitin.com:1443/api/v1/lighter/installer?arch=x86_64&os_type=windows&token=${{ inputs.token }}' -OutFile "install.exe"
         Start-Process install.exe -Wait
       shell: powershell
-    - name: kepp
-      run: sleep ${{ inputs.time }}m
-      shell: bash

@@ -23,6 +23,14 @@ Collie-Trickster 基于 牧云主机助手 (Collie) 实现的Github Action。主
 > 说到底，和大家开了个玩笑，`Collie-Trickster`的目的从一开始就是一个debug工具的定位。   
 > 任何使用`Collie-Trickster`作恶而导致可能面临的风险，包括github封号的情况，`Collie-Trickster`不承担任何责任。
 
+**助手限制**
+<details><summary>See More</summary>
+
+牧云主机助手目前默认仅免费三台主机，超过三台主机的使用量时，需要切换付费版本。
+也可以不切换，但是三台以上的机器无法成功注册。
+
+</details>
+
 **一些其他的声音**
 <details><summary>See More</summary>
 
@@ -79,11 +87,72 @@ git push
 
 7. 后续使用时可以通过手动触发action的方式。
 
+8. 关于退出：Linux主机，在百川解绑主机后，ci自动完成。
+
+![](https://cdn.dvkunion.cn/tricker/99d6436c64ab49859e5337787a5a3688.png)
+
+
+
 </details>
 
-### 高级模版: 通过http触发器自动触发
+### 高级: 切换主机系统(Windows)
 
 <details><summary>CLICK ME</summary>
+</details>
+
+### 高级: 通过http触发器自动触发的workflow模版
+
+<details><summary>CLICK ME</summary>
+每次推送代码才能触发实在太蠢了。当然也十分的不够优雅，需要手动把token放在github secrets中。
+
+在基础用法的基础上，这里给出一份通过`workflow_dispatch` 利用方式: 
+```yaml
+name: example
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: 'chaitin rivers token'
+        required: true
+      type:
+        description: 'your host type'
+        required: true
+
+jobs:
+  runner:
+    runs-on: ubuntu-latest # 选择你想要的主机系统如：ubuntu:20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: collie
+        if: ${{ inputs.token != '' && inputs.type != '' }}
+        uses: dvkunion/CollieTrickster@main
+        with:
+          token: ${{ inputs.token }}
+          host_type: ${{ inputs.type }}
+```
+
+使用时，需要你生成一个 [Github Token](https://github.com/settings/tokens/) ，作为认证用；然后将这份`yaml`放在你的仓库`.github/workflows/example.yml`， 
+
+然后发起http请求, 这里给出一个curl的调用:
+
+```shell
+curl \     
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <YOUR_GITHUB_ACTION>"\
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/<YOUR_GITHUB_USER_NAME>/<YOUR_GITHUB_REPOS>/actions/workflows/example.yml/dispatches \
+  -d '{"ref":"main","inputs":{"token":"<YOUR_TOKEN>","type": "linux"}'
+```
+
+其中:
++ <YOUR_GITHUB_ACTION>: github配置的token认证
++ <YOUR_GITHUB_USER_NAME>: 你github账户名称
++ <YOUR_GITHUB_REPOS>: 你fork的仓库名，一般直接fork的就写`CollieTrickster`即可。
++ <YOUR_TOKEN>: 长亭牧云主机助手生成的那个Token。
+
+这样，每发起一次请求，就会执行一次CI。成功上线一台主机。
+
 </details>
 
 ## 🎈 更有趣的玩法

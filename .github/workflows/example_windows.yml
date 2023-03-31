@@ -1,0 +1,23 @@
+# entry
+name: example
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: 'chaitin rivers token'
+        required: true
+      type:
+        description: 'your host type'
+        required: true
+
+jobs:
+  runner:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: collie
+        if: ${{ inputs.token != '' && inputs.type != '' }}
+        uses: dvkunion/CollieTrickster@main
+        with:
+          token: ${{ inputs.token }}
+          host_type: ${{ inputs.type }}
