@@ -8,9 +8,15 @@
 
 Collie Trickster is based on the MuYun Virtual Machine Assistant (Collie), Github Action implemented. Mainly used for more convenient use and Debug Github Action.
 
+Currently supported:
+
++ The Linux ci environment registers with the MuYun virtual machine assistant through `manual push`/`HTTP request trigger`, and can complete ci by uninstalling the MuYun virtual machine assistant.
+
++ Windows host support
+
 ## 🧑‍🤝‍🧑 Friendly reminder
 
-**About Risk**
+**# About Risk**
 
 > Actually, everyone knows that the so-called "Get An Free foreign hosts" is just a gimmick  -_-
 > 
@@ -24,7 +30,7 @@ Collie Trickster is based on the MuYun Virtual Machine Assistant (Collie), Githu
 > 
 > `Collie Trickster` does not assume any responsibility for any possible risks that may arise from using `Collie Strickster` to commit crimes, including the Github seal.".
 
-**MuYun Virtual Machine Assistant Limit**
+**# MuYun Virtual Machine Assistant Limit**
 
 <details><summary>See More</summary>
 
@@ -34,7 +40,7 @@ You can also not switch, but more than three machines cannot successfully regist
 
 </details>
 
-**Some other sounds**
+**# Some other sounds**
 
 <details><summary>See More</summary>
 </details>

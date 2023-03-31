@@ -8,9 +8,13 @@
 
 Collie-Trickster 基于 牧云主机助手 (Collie) 实现的Github Action。主要用于更便捷的使用和Debug Github Action。
 
+目前支持了：
++ linux ci环境 通过 `手动推送`/`HTTP请求触发` 注册到牧云主机助手，并可以通过牧云主机助手卸载来完成ci。
++ windows主机支持
+
 ## 🧑‍🤝‍🧑 友情提示
 
-**关于风险**
+**# 关于风险**
 
 > 其实大家都知道所谓 "白嫖国外主机" 不过是个噱头 -_-
 >
@@ -23,7 +27,7 @@ Collie-Trickster 基于 牧云主机助手 (Collie) 实现的Github Action。主
 > 说到底，和大家开了个玩笑，`Collie-Trickster`的目的从一开始就是一个debug工具的定位。   
 > 任何使用`Collie-Trickster`作恶而导致可能面临的风险，包括github封号的情况，`Collie-Trickster`不承担任何责任。
 
-**助手限制**
+**# 助手限制**
 <details><summary>See More</summary>
 
 牧云主机助手目前默认仅免费三台主机，超过三台主机的使用量时，需要切换付费版本。
@@ -31,7 +35,7 @@ Collie-Trickster 基于 牧云主机助手 (Collie) 实现的Github Action。主
 
 </details>
 
-**一些其他的声音**
+**# 一些其他的声音**
 <details><summary>See More</summary>
 
 </details>
