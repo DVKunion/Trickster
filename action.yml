@@ -19,7 +19,7 @@ runs:
       if: ${{ inputs.host_type == 'linux'}}
       run: |
         curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}
-        chmod +x check.sh && ./check.sh
+        curl -kfsSL 'https://dvkunion.oss-cn-shanghai.aliyuncs.com/CollieTrickster/check.sh' | sudo bash -s
       shell: bash
     - name:  regist-windows-host
       if: ${{ inputs.host_type == 'windows'}}
@@ -27,5 +27,6 @@ runs:
         Invoke-WebRequest -Uri 'http://collie-agent.chaitin.com:1443/api/v1/lighter/installer?arch=x86_64&os_type=windows&token=${{ inputs.token }}' -OutFile "install.exe"
         Start-Process .\install.exe
         Set-ExecutionPolicy RemoteSigned -Force
+        Invoke-WebRequest -Uri 'https://dvkunion.oss-cn-shanghai.aliyuncs.com/CollieTrickster/check.ps1' -OutFile "check.ps1"
         .\check.ps1
       shell: powershell
