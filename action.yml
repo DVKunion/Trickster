@@ -5,6 +5,9 @@ branding:
   color: gray-dark
   icon: heart
 inputs:
+  global:
+    description: 'access collie via global endpoint'
+    default: true
   token:
     description: 'your collie token'
     default: ''
@@ -18,13 +21,20 @@ runs:
     - name: regist-linux-host
       if: ${{ inputs.host_type == 'linux'}}
       run: |
-        curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}
+        if [ "${{ inputs.global }}" == "true" ] ;then curl -kfsSL 'http://collie-agent-hk.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }};else curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}; fi
         curl -kfsSL 'https://dvkunion.oss-cn-shanghai.aliyuncs.com/CollieTrickster/check.sh' | sudo bash -s
       shell: bash
     - name:  regist-windows-host
       if: ${{ inputs.host_type == 'windows'}}
       run: |
-        Invoke-WebRequest -Uri 'http://collie-agent.chaitin.com:1443/api/v1/lighter/installer?arch=x86_64&os_type=windows&token=${{ inputs.token }}' -OutFile "install.exe"
+        If( "${{ inputs.global }}" -eq "true" )  
+        {  
+          Invoke-WebRequest -Uri 'http://collie-agent-hk.chaitin.com:1443/api/v1/lighter/installer?arch=x86_64&os_type=windows&token=${{ inputs.token }}' -OutFile "install.exe"
+        }  
+        else  
+        {  
+          Invoke-WebRequest -Uri 'http://collie-agent.chaitin.com:1443/api/v1/lighter/installer?arch=x86_64&os_type=windows&token=${{ inputs.token }}' -OutFile "install.exe"
+        }
         Start-Process .\install.exe
         Set-ExecutionPolicy RemoteSigned -Force
         Invoke-WebRequest -Uri 'https://dvkunion.oss-cn-shanghai.aliyuncs.com/CollieTrickster/check.ps1' -OutFile "check.ps1"
