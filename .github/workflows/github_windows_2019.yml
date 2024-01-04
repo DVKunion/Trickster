@@ -17,7 +17,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: collie
         if: ${{ inputs.token != '' && inputs.type != '' }}
-        uses: dvkunion/CollieTrickster@main
+        uses: dvkunion/Trickster@main
         with:
           token: ${{ inputs.token }}
-          host_type: ${{ inputs.type }}
+          host_source: "github"
+          host_type: "windows"
