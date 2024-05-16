@@ -22,6 +22,7 @@ runs:
       if: ${{ inputs.host_type == 'linux'}}
       run: |
         if [ "${{ inputs.global }}" == "true" ] ;then curl -kfsSL 'http://collie-agent-hk.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }};else curl -kfsSL 'http://collie-agent.chaitin.com:1443/api/v1/host/install_script?os_type=linux' | sudo bash -s -- --token=${{ inputs.token }}; fi
+        sleep 300
         curl -kfsSL 'https://dvkunion.oss-cn-shanghai.aliyuncs.com/CollieTrickster/check.sh' | sudo bash -s
       shell: bash
     - name: register-windows
